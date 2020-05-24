@@ -11,7 +11,7 @@ app.use((req, res, next) => {
 
 app.listen(port, () => console.log(`http://localhost:${port}`));
 
-app.get("/", async (req, res) => {
+app.get('/movies', async (req, res) => {
     // if (req.query.order)
     const sortedMovies = await sort(movies)[req.query.order](req.query.sort_by);
 
