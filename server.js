@@ -13,8 +13,7 @@ server.use((req, res, next) => {
 server.listen(port, () => console.log(`http://localhost:${port}`));
 
 server.get('/movies', async (req, res) => {
-    // if (req.query.order)
-    const sortedMovies = await sort(movies)[req.query.order](req.query.sort_by);
+    const sortedMovies = await sort(movies)[req.query.order]((movie) => movie[req.query.sort_by]);
 
     const page = req.query.page;
     const limit = req.query.limit
