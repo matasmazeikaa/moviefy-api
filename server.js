@@ -12,8 +12,8 @@ server.use((req, res, next) => {
 
 server.listen(port, () => console.log(`http://localhost:${port}`));
 
-server.get('/movies', async (req, res) => {
-    const sortedMovies = await sort(movies)[req.query.order]((movie) => movie[req.query.sort_by]);
+server.get('/movies', (req, res) => {
+    const sortedMovies = sort(movies)[req.query.order]((movie) => movie[req.query.sort_by]);
 
     const page = req.query.page;
     const limit = req.query.limit
@@ -24,9 +24,9 @@ server.get('/movies', async (req, res) => {
 
     const list = sortedMovies.slice(startIndex, endIndex);
 
-    //
     res.json({
         count: movieCount,
         list,
     });
 });
+
