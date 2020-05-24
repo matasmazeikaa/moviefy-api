@@ -1,17 +1,18 @@
 const express = require('express');
 const sort = require('fast-sort');
 const movies = require('./movies.json');
-const app = express();
-const port = proccess.env.PORT || 3001;
+const server = express();
 
-app.use((req, res, next) => {
+const port = process.env.PORT || 3001;
+
+server.use((req, res, next) => {
     res.header("Access-Control-Allow-Origin", process.env.ORIGIN || "*");
     next();
 });
 
-app.listen(port, () => console.log(`http://localhost:${port}`));
+server.listen(port, () => console.log(`http://localhost:${port}`));
 
-app.get('/movies', async (req, res) => {
+server.get('/movies', async (req, res) => {
     // if (req.query.order)
     const sortedMovies = await sort(movies)[req.query.order](req.query.sort_by);
 
